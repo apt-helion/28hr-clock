@@ -146,7 +146,6 @@ void display_clock()
 		refresh();
 		sleep(1);
 	}
-
 }
 
 void main()
