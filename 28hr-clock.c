@@ -1,6 +1,7 @@
 #include <time.h>
 #include <curses.h>
 #include <unistd.h>
+#include <string.h>
 
 typedef struct {
 	char* day;
@@ -9,18 +10,29 @@ typedef struct {
 	int sec;
 } ti;
 
+// seven-segment display
+//   |a|b|c|d|e|f|g|
+// 0 |1|1|1|1|1|1|0|
+// 1 |0|1|1|0|0|0|0|
+// 2 |1|1|0|1|1|0|1|
+// 3 |1|1|1|1|0|0|1|
+// 4 |0|1|1|0|0|1|1|
+// 5 |1|0|1|1|0|1|1|
+// 6 |1|0|1|1|1|1|1|
+// 7 |1|1|1|0|0|0|0|
+// 8 |1|1|1|1|1|1|1|
+// 9 |1|1|1|1|0|1|1|
 int LED_DIGITS[10] = {
-//	  abcdefg
-    0b1111110, // 0
-    0b0110000, // 1
-    0b1101101, // 2
-    0b1111001, // 3
-    0b0110011, // 4
-    0b1011011, // 5
-    0b1011111, // 6
-    0b1110000, // 7
-    0b1111111, // 8
-    0b1111011  // 9
+	0b1111110,
+    0b0110000,
+    0b1101101,
+    0b1111001,
+    0b0110011,
+    0b1011011,
+    0b1011111,
+    0b1110000,
+    0b1111111,
+    0b1111011
 };
 
 void print_led_digit(int dig, int y, int x) {
@@ -108,6 +120,7 @@ void display_clock()
 		int time_hour = timeinfo->tm_hour;
 
 		convert_time(time_day, time_hour, &time);
+
 		int hr = time.hour;
 		dig1 = (hr / 10) % 10;
 		dig2 = hr % 10;
@@ -127,6 +140,8 @@ void display_clock()
 		dig2 = sec % 10;
 		print_led_digit(LED_DIGITS[dig1], row_off, col_off + 18);
 		print_led_digit(LED_DIGITS[dig2], row_off, col_off + 22);
+
+		mvprintw(row_off-1, (col-strlen(time.day))/2-2, time.day);
 
 		refresh();
 		sleep(1);
