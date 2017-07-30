@@ -22,34 +22,36 @@ typedef struct {
 // 7 |1|1|1|0|0|0|0|
 // 8 |1|1|1|1|1|1|1|
 // 9 |1|1|1|1|0|1|1|
+
 int LED_DIGITS[10] = {
 	0b1111110,
-    0b0110000,
-    0b1101101,
-    0b1111001,
-    0b0110011,
-    0b1011011,
-    0b1011111,
-    0b1110000,
-    0b1111111,
-    0b1111011
+	0b0110000,
+	0b1101101,
+	0b1111001,
+	0b0110011,
+	0b1011011,
+	0b1011111,
+	0b1110000,
+	0b1111111,
+	0b1111011
 };
 
-void print_led_digit(int dig, int y, int x) {
-    if ((dig >> 6) & 1) // a
-        mvprintw(y, x + 1, "__");
-     if ((dig >> 5) & 1) // b
-        mvprintw(y + 1, x + 3, "|");
-     if ((dig >> 4) & 1) // c
-        mvprintw(y + 2, x + 3, "|");
-     if ((dig >> 3) & 1) // d
-        mvprintw(y + 2, x + 1, "__");
-     if ((dig >> 2) & 1) // e
-        mvprintw(y + 2, x, "|");
-     if ((dig >> 1) & 1) // f
-        mvprintw(y + 1, x, "|");
-     if ((dig >> 0) & 1) // g
-        mvprintw(y + 1, x + 1, "__");
+void print_led_digit(int dig, int y, int x)
+{
+	if ((dig >> 6) & 1) // a
+	    mvprintw(y, x + 1, "__");
+	if ((dig >> 5) & 1) // b
+	    mvprintw(y + 1, x + 3, "|");
+	if ((dig >> 4) & 1) // c
+	    mvprintw(y + 2, x + 3, "|");
+	if ((dig >> 3) & 1) // d
+	    mvprintw(y + 2, x + 1, "__");
+	if ((dig >> 2) & 1) // e
+	    mvprintw(y + 2, x, "|");
+	if ((dig >> 1) & 1) // f
+	    mvprintw(y + 1, x, "|");
+	if ((dig >> 0) & 1) // g
+	    mvprintw(y + 1, x + 1, "__");
 }
 
 
@@ -61,27 +63,27 @@ void convert_time(int time_day, int time_hour, ti *new_time)
 	int day = current_hour / 28;
 	switch (day) {
 		case (0) :
-			new_time->day = "Day 1";
+			new_time->day = "Alphaday";
 			new_time->hour = current_hour;
 		break;
 		case (1) :
-			new_time->day = "Day 2";
+			new_time->day = "Betaday";
 			new_time->hour = current_hour-28;
 		break;
 		case (2) :
-			new_time->day = "Day 3";
+			new_time->day = "Gammaday";
 			new_time->hour = current_hour-56;
 		break;
 		case (3) :
-			new_time->day = "Day 4";
+			new_time->day = "Deltaday";
 			new_time->hour = current_hour-86;
 		break;
 		case (4) :
-			new_time->day = "Day 5";
+			new_time->day = "Epsilonday";
 			new_time->hour = current_hour-112;
 		break;
 		case (5) :
-			new_time->day = "Day 6";
+			new_time->day = "Zetaday";
 			new_time->hour = current_hour-140;
 		break;
 		default : break;
