@@ -97,8 +97,6 @@ void display_clock()
 		clear();
 		getmaxyx(stdscr, row, col);
 
-		mvprintw(row - 1, 0, "(q)uit");
-
 		// get time
 		time_t rawtime;
 		struct tm * timeinfo;
@@ -107,7 +105,7 @@ void display_clock()
 
 		ti time; // new time structure in 28 hr format
 
-        int row_off = (row / 2) - 1;
+		int row_off = (row / 2) - 1;
 		int col_off = (col / 2) - (33 / 2);
 
 		// get min and secs
